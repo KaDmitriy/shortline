@@ -11,5 +11,6 @@ plugins {
 }
 
 rootProject.name = 'shortline'
+include('gateway')
 include('content')
 include('shortener')
