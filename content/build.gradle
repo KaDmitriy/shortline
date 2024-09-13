@@ -6,6 +6,7 @@ plugins {
 
 group = 'kda.shortline.content'
 version = '0.0.1-SNAPSHOT'
+def appfilename = "content-${version}.jar"
 
 java {
 	toolchain {
@@ -27,4 +28,24 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+
+bootJar.doLast {
+	def docker = "../docker/content"
+	copy {
+		from "${buildDir}/libs/"
+		into docker + "/rootfs"
+		include appfilename
+		// rename(nameapp, "content.jar")
+	}
+	new File(projectDir, docker+"/rootfs/version").text = """Version: ${version}
+Application-name: ShortLine-Content
+Application-file: ${appfilename}
+"""
+}
+
+clean.doFirst {
+	delete "../docker/content/rootfs/"+appfilename
+	delete "../docker/content/rootfs/version"
 }
