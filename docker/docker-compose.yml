@@ -1,0 +1,10 @@
+services:
+  content:
+    container_name: shortline-content
+    build:
+      context: ./content
+      args:
+        version: ${APP_VERSION}
+    image: ${IMAGE_NAME}
+    ports:
+      - 8001:8001
