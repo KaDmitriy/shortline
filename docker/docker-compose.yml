@@ -6,8 +6,14 @@ services:
       args:
         version: ${GATEWAY_APP_VERSION}
     image: ${GATEWAY_IMAGE_NAME}
+    environment:
+      URL_CONTENT: http://content:8001
+      URL_SHORTENER: http://shortener:8002
     ports:
       - 8000:8000
+    networks:
+      - net-shortline
+
   content:
     container_name: shortline-content
     build:
@@ -17,6 +23,9 @@ services:
     image: ${CONTENT_IMAGE_NAME}
     ports:
       - 8001:8001
+    networks:
+      - net-shortline	  
+
   shortener:
     container_name: shortline-shortener
     build:
@@ -26,3 +35,9 @@ services:
     image: ${SHORTENER_IMAGE_NAME}
     ports:
       - 8002:8002
+    networks:
+      - net-shortline
+
+networks:
+  net-shortline:
+ 
