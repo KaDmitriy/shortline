@@ -1,10 +1,28 @@
 services:
+  gateway:
+    container_name: shortline-gateway
+    build:
+      context: ./gateway
+      args:
+        version: ${GATEWAY_APP_VERSION}
+    image: ${GATEWAY_IMAGE_NAME}
+    ports:
+      - 8000:8000
   content:
     container_name: shortline-content
     build:
       context: ./content
       args:
-        version: ${APP_VERSION}
-    image: ${IMAGE_NAME}
+        version: ${CONTENT_APP_VERSION}
+    image: ${CONTENT_IMAGE_NAME}
     ports:
       - 8001:8001
+  shortener:
+    container_name: shortline-shortener
+    build:
+      context: ./shortener
+      args:
+        version: ${SHORTENER_APP_VERSION}
+    image: ${SHORTENER_IMAGE_NAME}
+    ports:
+      - 8002:8002
