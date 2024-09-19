@@ -40,7 +40,7 @@ bootJar.doLast {
 		// rename(nameapp, "content.jar")
 	}
 	new File(projectDir, docker+"/rootfs/version").text = """Version: ${version}
-Application-name: ShortLine-Content
+Application-fullname: ShortLine-Content
 Application-file: ${appfilename}
 """
 }
