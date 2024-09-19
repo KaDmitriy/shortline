@@ -6,6 +6,7 @@ plugins {
 
 group = 'kda.shortline.gateway'
 version = '0.0.1-SNAPSHOT'
+def appfilename = "gateway-${version}.jar"
 
 java {
 	toolchain {
@@ -35,4 +36,23 @@ dependencyManagement {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+bootJar.doLast {
+	def docker = "../docker/gateway"
+	copy {
+		from "${buildDir}/libs/"
+		into docker + "/rootfs"
+		include appfilename
+		// rename(nameapp, "content.jar")
+	}
+	new File(projectDir, docker+"/rootfs/version").text = """Version: ${version}
+Application-fullname: ShortLine-Content
+Application-file: ${appfilename}
+"""
+}
+
+clean.doFirst {
+	delete "../docker/gateway/rootfs/"+appfilename
+	delete "../docker/gateway/rootfs/version"
 }
