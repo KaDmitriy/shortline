@@ -53,6 +53,16 @@ Application-file: ${appfilename}
 }
 
 clean.doFirst {
-	delete "../docker/gateway/rootfs/"+appfilename
-	delete "../docker/gateway/rootfs/version"
+	//delete dockerdir+"/rootfs/"+appfilename
+	delete dockerdir+"/rootfs/version"
+	
+	def delfiles = new HashSet()
+    new File(projectDir, dockerdir+"/rootfs/").eachFile { file ->
+        if (file.isDirectory() || (file.name ==~ /(.*)\.jar/)) {
+            delfiles << file
+            project.logger.error('files del:'+file)
+        } 
+    }
+	delete delfiles
+	
 }
