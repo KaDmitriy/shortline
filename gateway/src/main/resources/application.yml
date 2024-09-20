@@ -12,11 +12,11 @@ spring:
 #      enabled: true
       routes:
         - id: content
-          uri: ${URL_CONTENT:http://127.0.0.1:8001/}
+          uri: ${ROUTE_URL_CONTENT:http://127.0.0.1:8001/}
           predicates:
             - Path=/
         - id: shortener
-          uri: ${URL_SHORTENER:http://127.0.0.1:8002/}
+          uri: ${ROUTE_SHORTENER:http://127.0.0.1:8002/}
           predicates:
             - Path=/create/**
           filters:

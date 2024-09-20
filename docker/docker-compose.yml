@@ -7,8 +7,8 @@ services:
         version: ${GATEWAY_APP_VERSION}
     image: ${GATEWAY_IMAGE_NAME}
     environment:
-      URL_CONTENT: http://content:8001
-      URL_SHORTENER: http://shortener:8002
+      ROUTE_URL_CONTENT: http://content:8001
+      ROUTE_URL_SHORTENER: http://shortener:8002
     ports:
       - 8000:8000
     networks:
