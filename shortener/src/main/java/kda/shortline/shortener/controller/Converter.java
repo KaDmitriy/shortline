@@ -2,29 +2,32 @@ package kda.shortline.shortener.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kda.shortline.shortener.dto.LongLink;
-import kda.shortline.shortener.dto.ShortLink;
+import kda.shortline.shortener.dto.LongLinkDTO;
+import kda.shortline.shortener.dto.ShortLinkDTO;
+import kda.shortline.shortener.dto.service.CodeURL;
 
 /**
  * Converting long links to short links
  */
 
 @RestController()
+@RequestMapping("/converter")
 public class Converter {
-	
-	private final Logger log = LoggerFactory.getLogger(Converter.class);
-	
-	String nameDomain = "mydomain"; 
 
-	@PostMapping("/converter/reduce")
-	public ShortLink reduce (@RequestBody LongLink longLink) {
-		String link = nameDomain+longLink.getLink();
-		log.info("link:{}", link);
-		return new ShortLink(link);
+	private final Logger log = LoggerFactory.getLogger(Converter.class);
+
+	@Autowired
+	private CodeURL codeUrl;
+
+	@PostMapping("/reduce")
+	public ShortLinkDTO reduce(@RequestBody LongLinkDTO longLink) {
+		log.info("link:reduce");
+		return new ShortLinkDTO(codeUrl.createUrl(longLink.getLink()));
 	}
-	
 }

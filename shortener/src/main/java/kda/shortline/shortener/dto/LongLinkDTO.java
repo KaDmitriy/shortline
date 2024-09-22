@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class LongLink {
+public class LongLinkDTO {
 
 	private String link;
 	
