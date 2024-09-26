@@ -7,6 +7,7 @@ plugins {
 group = 'kda.shortline.content'
 version = '0.0.1-SNAPSHOT'
 def appfilename = "content-${version}.jar"
+def dockerdir = "../docker/content"
 
 java {
 	toolchain {
@@ -53,7 +54,7 @@ clean.doFirst {
     new File(projectDir, dockerdir+"/rootfs/").eachFile { file ->
         if (file.isDirectory() || (file.name ==~ /(.*)\.jar/)) {
             delfiles << file
-            project.logger.error('files del:'+file)
+            //project.logger.error('files del:'+file)
         } 
     }
 	delete delfiles

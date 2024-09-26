@@ -7,6 +7,7 @@ plugins {
 group = 'kda.shortline.gateway'
 version = '0.0.2-SNAPSHOT'
 def appfilename = "gateway-${version}.jar"
+def dockerdir = "../docker/gateway"
 
 java {
 	toolchain {
@@ -60,7 +61,7 @@ clean.doFirst {
     new File(projectDir, dockerdir+"/rootfs/").eachFile { file ->
         if (file.isDirectory() || (file.name ==~ /(.*)\.jar/)) {
             delfiles << file
-            project.logger.error('files del:'+file)
+            //project.logger.error('files del:'+file)
         } 
     }
 	delete delfiles
