@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kda.shortline.shortener.dto.LongLinkDTO;
 import kda.shortline.shortener.dto.ShortLinkDTO;
-import kda.shortline.shortener.dto.service.CodeURL;
+import kda.shortline.shortener.dto.service.GenerateURL;
 
 /**
  * Converting long links to short links
@@ -23,11 +23,11 @@ public class Converter {
 	private final Logger log = LoggerFactory.getLogger(Converter.class);
 
 	@Autowired
-	private CodeURL codeUrl;
+	private GenerateURL generateURL;
 
 	@PostMapping("/reduce")
 	public ShortLinkDTO reduce(@RequestBody LongLinkDTO longLink) {
 		log.info("link:reduce");
-		return new ShortLinkDTO(codeUrl.createUrl(longLink.getLink()));
+		return generateURL.generator(longLink);
 	}
 }
