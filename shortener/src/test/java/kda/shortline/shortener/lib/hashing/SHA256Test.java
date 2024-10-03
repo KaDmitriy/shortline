@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import kda.shortline.shortener.lib.сonverter.SHA256;
+
 class SHA256Test {
 
 	@Test
