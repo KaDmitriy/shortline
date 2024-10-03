@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import kda.shortline.shortener.lib.hashing.Hash;
+import kda.shortline.shortener.lib.сonverter.Converter;
 
 /**
  * Performing encoding procedure and creating a URL
@@ -20,7 +20,7 @@ public class CodeURL {
 	String nameDomain;
 	
 	@Autowired
-	private Hash hash;
+	private Converter SHA256;
 	
 	/**
 	 * Generation unique string lenght 8 char
@@ -30,7 +30,7 @@ public class CodeURL {
 	 */
 	public String coding(String url) {
 		//return Integer.toString( (int) (Math.random()*1000) );
-		return hash.generate(url);
+		return SHA256.encode(1L);
 	}
 	
 	/**
